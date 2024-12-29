@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegistroEmpleados.AppMovil.Vistas.ListarEmpleados"
+             Title="Listado Estudiantes">
+    <ScrollView>
+        <Grid Padding="10" RowSpacing="10" ColumnSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <SearchBar Placeholder="Buscar..."
+                       x:Name="filtroSearchBar"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextChanged="filtroSearchBar_TextChanged"/>
+            <Button Text="Nuevo Estudiante"
+                    x:Name="NuevoEmpleadoBoton"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="NuevoEmpleadoBoton_Clicked"/>
+
+            <CollectionView x:Name="listaCollection"
+                            ItemsSource="{Binding Lista}"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10" Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                                   Source="profile.jpg"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding NombreCompleto}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Cargo.Nombre}"/>
+                            <ImageButton x:Name="editarButton"
+                                         Grid.Column="2"
+                                         Source="edit_icon.png"
+                                         BackgroundColor="Transparent"
+                                         HeightRequest="25"
+                                         WidthRequest="25"
+                                         CommandParameter="{Binding .}"
+                                         Clicked="editarButton_Clicked"/>
+                            <ImageButton x:Name="deshabilitarButton"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="1"
+                                         Source="disable.png"
+                                         BackgroundColor="Transparent"
+                                         HeightRequest="25"
+                                         WidthRequest="25"
+                                         CommandParameter="{Binding .}"
+                                         Clicked="deshabilitarButton_Clicked"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentPage>
